@@ -9,20 +9,16 @@ package sprint3;
  *
  * @author Ong Chong Ren
  */
-
 import dsaassignment.*;
 import java.io.*;
+import java.util.Objects;
 
-     
-
-public class Food implements Serializable{
-    
+public class Food implements Serializable {
 
     private String location;
     private String restaurant;
     private String menu;
     private String menuDescription;
-   
 
     public Food() {
     }
@@ -34,9 +30,41 @@ public class Food implements Serializable{
         this.menuDescription = menuDescription;
     }
 
-
     public String getLocation() {
         return location;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Food other = (Food) obj;
+        if (!Objects.equals(this.location, other.location)) {
+            return false;
+        }
+        if (!Objects.equals(this.restaurant, other.restaurant)) {
+            return false;
+        }
+        if (!Objects.equals(this.menu, other.menu)) {
+            return false;
+        }
+        if (!Objects.equals(this.menuDescription, other.menuDescription)) {
+            return false;
+        }
+        return true;
     }
 
     public String getRestaurant() {
@@ -72,8 +100,4 @@ public class Food implements Serializable{
         return "Food{" + "location=" + location + ", restaurant=" + restaurant + ", menu=" + menu + ", menuDescription=" + menuDescription + '}';
     }
 
-   
-    
-    
-    
 }
