@@ -3,9 +3,13 @@ package affiliate;
 import java.util.Scanner;
 
 /**
- * @author Tan Kai Lun Group 10 Member group 3 part A Task ID : 152569170 User
- * story : As a restaurant manager, I want to add food details into food menu,
- * so that I can customer can select the food for order.
+ * @author Tan Kai Lun
+ * Group 10
+ * Member group 3 
+ * part A 
+ * Task ID : 152569170
+ * User story : As a restaurant manager, I want to add food details into food menu,
+ * so that customer can select the food for order.
  */
 public class foodMenu {
 
