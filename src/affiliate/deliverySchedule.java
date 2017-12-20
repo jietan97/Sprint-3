@@ -20,7 +20,7 @@ import java.util.Scanner;
 public class deliverySchedule {
     static Scanner sc = new Scanner(System.in);
     static int orderCount = 1;
-    static String mainC,userID,orderID,password,rpassword,cname,cphoneNo,caddress1,caddress2,caddress3,czipCode,ccity,cstate, cpaymentStatus;
+    static String mainC,userID,orderID,password,rpassword,cname,cphoneNo,caddress1,caddress2,czipCode,ccity,cstate, cpaymentStatus;
     static String toAddDelivery = "y";
     static String quit = "f";
     
@@ -153,7 +153,6 @@ public class deliverySchedule {
         order.phoneNo = cphoneNo;
         order.address1 = caddress1;
         order.address2 = caddress2;
-        order.address3 = caddress3;
         order.zipCode = czipCode;
         order.city = ccity;
         order.state = cstate;
