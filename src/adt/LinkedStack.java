@@ -1,4 +1,6 @@
-package affiliate;
+package adt;
+
+import affiliate.StackInterface;
 
 public class LinkedStack<T> implements StackInterface<T>{
 

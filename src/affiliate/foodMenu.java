@@ -1,5 +1,6 @@
 package affiliate;
 
+import adt.LinkedStack;
 import java.util.Scanner;
 
 /**

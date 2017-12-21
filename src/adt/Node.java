@@ -1,4 +1,4 @@
-package affiliate;
+package adt;
 
 public class Node<T> {
     private T data;
