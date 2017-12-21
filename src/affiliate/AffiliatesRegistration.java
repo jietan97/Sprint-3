@@ -25,23 +25,23 @@ public class AffiliatesRegistration {
     static Scanner sc = new Scanner(System.in);
     //static String userID, password, rpassword, passwordHit, name, restaurantName, email,icno, phoneNo, address1, address2, city, state, zipCode;
     static String toAddAffiliates = "y";
-
-    static LinkedStack<String> userIDL = new LinkedStack<>();
-    static LinkedStack<String> restaurantNameL = new LinkedStack<>();
-    static LinkedStack<String> nameL = new LinkedStack<>();
-    static LinkedStack<String> emailL = new LinkedStack<>();
-    static LinkedStack<String> passwordL = new LinkedStack<>();
-    static LinkedStack<String> passwordHitL = new LinkedStack<>();
-    static LinkedStack<String> icnoL = new LinkedStack<>();
-    static LinkedStack<String> phoneNoL = new LinkedStack<>();
-    static LinkedStack<String> address1L = new LinkedStack<>();
-    static LinkedStack<String> address2L = new LinkedStack<>();
-    static LinkedStack<String> cityL = new LinkedStack<>();
-    static LinkedStack<String> stateL = new LinkedStack<>();
-    static LinkedStack<String> zipCodeL = new LinkedStack<>();
-
+    static LinkedStack<AffiliateClass> affiliates = new LinkedStack<>();
+//    static LinkedStack<String> userIDL = new LinkedStack<>();
+//    static LinkedStack<String> restaurantNameL = new LinkedStack<>();
+//    static LinkedStack<String> nameL = new LinkedStack<>();
+//    static LinkedStack<String> emailL = new LinkedStack<>();
+//    static LinkedStack<String> passwordL = new LinkedStack<>();
+//    static LinkedStack<String> passwordHitL = new LinkedStack<>();
+//    static LinkedStack<String> icnoL = new LinkedStack<>();
+//    static LinkedStack<String> phoneNoL = new LinkedStack<>();
+//    static LinkedStack<String> address1L = new LinkedStack<>();
+//    static LinkedStack<String> address2L = new LinkedStack<>();
+//    static LinkedStack<String> cityL = new LinkedStack<>();
+//    static LinkedStack<String> stateL = new LinkedStack<>();
+//    static LinkedStack<String> zipCodeL = new LinkedStack<>();
+    static String userIDL, passwordL, rpasswordL, passwordHitL, nameL, restaurantNameL, emailL,icnoL, phoneNoL, address1L, address2L, cityL, stateL, zipCodeL; 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
-
+        AffiliateClass ac = new AffiliateClass(userIDL, passwordL, rpasswordL, passwordHitL, nameL, restaurantNameL, emailL,icnoL, phoneNoL, address1L, address2L, cityL, stateL, zipCodeL);
         //AffiliatesRegistration ar = new AffiliatesRegistration();
         while (toAddAffiliates.equals("y")) {
             AffiliatesReg();
@@ -51,7 +51,7 @@ public class AffiliatesRegistration {
     public static void AffiliatesReg() throws IOException, ClassNotFoundException {
         //menu start
         System.out.println("\n-- Fastest Deliveryman --\nAffiliates Registration\n====================================");
-        as.userID = String.format("aff%03d", userIDL.size() + 1);
+        as.userID = String.format("aff%03d", affiliates.size() + 1);
         System.out.println("Restaurant ID\t: " + as.userID);
         //userID = sc.next();
         do {
@@ -102,19 +102,21 @@ public class AffiliatesRegistration {
             //break;
         }
 
-        userIDL.push(as.userID);
-        restaurantNameL.push(as.restaurantName);
-        nameL.push(as.name);
-        passwordL.push(as.password);
-        passwordHitL.push(as.passwordHit);
-        icnoL.push(as.icno);
-        phoneNoL.push(as.phoneNo);
-        emailL.push(as.email);
-        address1L.push(as.address1);
-        address2L.push(as.address2);
-        cityL.push(as.city);
-        stateL.push(as.state);
-        zipCodeL.push(as.zipCode);
+        affiliates.push(as);
+        
+//        userIDL.push(as.userID);
+//        restaurantNameL.push(as.restaurantName);
+//        nameL.push(as.name);
+//        passwordL.push(as.password);
+//        passwordHitL.push(as.passwordHit);
+//        icnoL.push(as.icno);
+//        phoneNoL.push(as.phoneNo);
+//        emailL.push(as.email);
+//        address1L.push(as.address1);
+//        address2L.push(as.address2);
+//        cityL.push(as.city);
+//        stateL.push(as.state);
+//        zipCodeL.push(as.zipCode);
 
         //System.out.println("User ID\t: " + userIDL);
         System.out.printf("====================================\nDo You want to add more affiliates?(y=yes, n=no): ");
