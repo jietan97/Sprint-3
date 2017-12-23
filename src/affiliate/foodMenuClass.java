@@ -1,83 +1,95 @@
 package affiliate;
 
-public class foodMenuClass {
+import java.io.Serializable;
 
-    static String affID, openDays, openTimeStart, openTimeEnd, foodID, foodName, foodDesc, foodPrice, promotionPrice;
+public class foodMenuClass implements Serializable {
+
+    String affID, foodID, foodName, foodDesc, foodPrice, promotionPrice;
+//    , openDays, openTimeStart, openTimeEnd,
     static String restaufoodID;
 
     public foodMenuClass() {
     }
-
-    public static String getAffID() {
+    
+    public foodMenuClass(String affID, String foodID, String foodName, String foodDesc, String foodPrice, String promotionPrice) {
+        this.affID = affID;
+        this.foodID = foodID;
+        this.foodName = foodName;
+        this.foodDesc = foodDesc;
+        this.foodPrice = foodPrice;
+        this.promotionPrice = promotionPrice;
+    }
+    
+    public String getAffID() {
         return affID;
     }
 
-    public static void setAffID(String affID) {
-        foodMenuClass.affID = affID;
+    public void setAffID(String affID) {
+        this.affID = affID;
     }
 
-    public static String getOpenDays() {
-        return openDays;
-    }
+//    public static String getOpenDays() {
+//        return openDays;
+//    }
+//
+//    public static void setOpenDays(String openDays) {
+//        foodMenuClass.openDays = openDays;
+//    }
+//
+//    public static String getOpenTimeStart() {
+//        return openTimeStart;
+//    }
+//
+//    public static void setOpenTimeStart(String openTimeStart) {
+//        foodMenuClass.openTimeStart = openTimeStart;
+//    }
+//
+//    public static String getOpenTimeEnd() {
+//        return openTimeEnd;
+//    }
+//
+//    public static void setOpenTimeEnd(String openTimeEnd) {
+//        foodMenuClass.openTimeEnd = openTimeEnd;
+//    }
 
-    public static void setOpenDays(String openDays) {
-        foodMenuClass.openDays = openDays;
-    }
-
-    public static String getOpenTimeStart() {
-        return openTimeStart;
-    }
-
-    public static void setOpenTimeStart(String openTimeStart) {
-        foodMenuClass.openTimeStart = openTimeStart;
-    }
-
-    public static String getOpenTimeEnd() {
-        return openTimeEnd;
-    }
-
-    public static void setOpenTimeEnd(String openTimeEnd) {
-        foodMenuClass.openTimeEnd = openTimeEnd;
-    }
-
-    public static String getFoodID() {
+    public String getFoodID() {
         return foodID;
     }
 
-    public static void setFoodID(String foodID) {
-        foodMenuClass.foodID = foodID;
+    public void setFoodID(String foodID) {
+        this.foodID = foodID;
     }
 
-    public static String getFoodName() {
+    public String getFoodName() {
         return foodName;
     }
 
-    public static void setFoodName(String foodName) {
-        foodMenuClass.foodName = foodName;
+    public void setFoodName(String foodName) {
+        this.foodName = foodName;
     }
 
-    public static String getFoodDesc() {
+    public String getFoodDesc() {
         return foodDesc;
     }
 
-    public static void setFoodDesc(String foodDesc) {
-        foodMenuClass.foodDesc = foodDesc;
+    public void setFoodDesc(String foodDesc) {
+        this.foodDesc = foodDesc;
     }
 
-    public static String getFoodPrice() {
+    public String getFoodPrice() {
         return foodPrice;
     }
 
-    public static void setFoodPrice(String foodPrice) {
-        foodMenuClass.foodPrice = foodPrice;
+    public void setFoodPrice(String foodPrice) {
+        this.foodPrice = foodPrice;
     }
 
-    public static String getPromotionPrice() {
+    public String getPromotionPrice() {
         return promotionPrice;
     }
 
-    public static void setPromotionPrice(String promotionPrice) {
-        foodMenuClass.promotionPrice = promotionPrice;
+    public void setPromotionPrice(String promotionPrice) {
+        this.promotionPrice = promotionPrice;
     }
 
 }

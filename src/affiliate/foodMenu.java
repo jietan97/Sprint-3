@@ -1,6 +1,6 @@
 package affiliate;
 
-import adt.LinkedStack;
+import adt.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -21,7 +21,8 @@ public class foodMenu {
     static Scanner sc = new Scanner(System.in);
     static String toAddFood = "y", toEditFood = "y", mainChoice, leaveMenu = "y";
     //static String affID, openDays, openTimeStart, openTimeEnd, foodID, foodName, foodDesc, foodPrice, promotionPrice;
-    static LinkedStack<foodMenuClass> foodM = new LinkedStack<>();
+    //static LinkedStack<foodMenuClass> foodM = new LinkedStack<>();
+    static ListInterface<foodMenuClass> foodM = new LList<>();
 //    static LinkedStack<String> affIDL = new LinkedStack<>();
 //    static LinkedStack<String> openDaysL = new LinkedStack<>();
 //    static LinkedStack<String> openTimeStartL = new LinkedStack<>();
@@ -34,11 +35,14 @@ public class foodMenu {
 
     public static void main(String[] args) {
         while (leaveMenu.equals("y")) {
+            //foodM = retrieveFoodMenu();
             FoodMainMenu();
+            //saveFoodMenu();
         }
     }
 
     public static void FoodMainMenu() {
+        toAddFood = "y";
         System.out.printf("\n-- Fastest Deliveryman --\nrestaurant food menu\n====================================\n"
                 + "1) Add food menu\n"
                 + "2) Edit food menu\n");
@@ -84,7 +88,7 @@ public class foodMenu {
 //        System.out.printf("\n\nBusiness Time - End\t(23:00):");
 //        openTimeStart = sc.nextLine();
         System.out.println("\nFoods\n====================================");
-        fmc.foodID = String.format("f%03d", foodM.size() + 1);
+        fmc.foodID = String.format("f%03d", foodM.getNumberOfEntries() + 1);
         //foodID = "f001";
         System.out.println("Food ID\t\t: " + fmc.foodID);
         System.out.printf("Name\t\t: ");
@@ -97,8 +101,12 @@ public class foodMenu {
         fmc.promotionPrice = sc.nextLine();
         System.out.printf("Add foods?(y=yes,n=no)\t: ");
         toAddFood = sc.nextLine();
+        
+        foodM = retrieveFoodMenu();
+        foodM.add(fmc);
+        
+        saveFoodMenu();
 
-        foodM.push(fmc);
 //        foodIDL.push(foodID);
 //        foodNameL.push(foodName);
 //        foodDescL.push(foodDesc);
@@ -125,53 +133,82 @@ public class foodMenu {
     public static class foodMenuStream implements Serializable {
 
         public String affID = null;
-        public String openDays = null;
-        public String openTimeStart = null;
-        public String openTimeEnd = null;
-        public String restaufoodID = null;
+//        public String openDays = null;
+//        public String openTimeStart = null;
+//        public String openTimeEnd = null;
+//        public String restaufoodID = null;
         public String foodName = null;
         public String foodDesc = null;
         public String foodPrice = null;
         public String promotionPrice = null;
     }
 
-    public static void saveFoodMenu() throws IOException, ClassNotFoundException {
-        ObjectOutputStream foodOutputStream
-                = new ObjectOutputStream(new FileOutputStream("foodMenu.dat"));
-
-        foodMenuStream foodMStrm = new foodMenuStream();
-        foodMStrm.affID = fmc.affID;
-        foodMStrm.openDays = fmc.openDays;
-        foodMStrm.openTimeStart = fmc.openTimeStart;
-        foodMStrm.openTimeEnd = fmc.openTimeEnd;
-        foodMStrm.restaufoodID = fmc.restaufoodID;
-        foodMStrm.foodName = fmc.foodName;
-        foodMStrm.foodDesc = fmc.foodDesc;
-        foodMStrm.foodPrice = fmc.foodPrice;
-        foodMStrm.promotionPrice = fmc.promotionPrice;
-
-        foodOutputStream.writeObject(foodMStrm);
-        foodOutputStream.close();
+//    public static void saveFoodMenu() throws IOException, ClassNotFoundException {
+//        ObjectOutputStream foodOutputStream
+//                = new ObjectOutputStream(new FileOutputStream("foodMenu.dat"));
+//
+//        foodMenuStream foodMStrm = new foodMenuStream();
+//        foodMStrm.affID = fmc.affID;
+//        foodMStrm.openDays = fmc.openDays;
+//        foodMStrm.openTimeStart = fmc.openTimeStart;
+//        foodMStrm.openTimeEnd = fmc.openTimeEnd;
+//        foodMStrm.restaufoodID = fmc.restaufoodID;
+//        foodMStrm.foodName = fmc.foodName;
+//        foodMStrm.foodDesc = fmc.foodDesc;
+//        foodMStrm.foodPrice = fmc.foodPrice;
+//        foodMStrm.promotionPrice = fmc.promotionPrice;
+//
+//        foodOutputStream.writeObject(foodMStrm);
+//        foodOutputStream.close();
+//    }
+    
+    public static void saveFoodMenu() {
+        
+        try {
+            ObjectOutputStream ooStream = new ObjectOutputStream(new FileOutputStream("foodMenu.dat"));
+            ooStream.writeObject(foodM);
+            ooStream.close();
+          } catch (FileNotFoundException ex) {
+            System.out.println("FileNotFoundException");
+          } catch (IOException ex) {
+              System.out.println(ex.getMessage());
+            System.out.println("IOException");
+          }
     }
 
-    public static void readFoodMenu() throws IOException, ClassNotFoundException {
-        try {
-            ObjectInputStream foodInputStream
-                    = new ObjectInputStream(new FileInputStream("foodMenu.dat"));
-
-            foodMenuStream foodMS = (foodMenuStream) foodInputStream.readObject();
-            foodInputStream.close();
-//            System.out.println("\nRegistration Success\n====================================");
-//            System.out.println("Restaurant ID\t: " + foodMS.affID);
-//            System.out.println("Restaurant\t: " + foodMS.openDays + "\n");
-//            System.out.println("Owner's name\t: " + foodMS.openTimeStart);
-//            System.out.println("IC number\t: " + foodMS.openTimeEnd);
-//            System.out.println("Tel number\t: " + foodMS.restaufoodID);
-//            System.out.println("Email\t\t: " + foodMS.foodName);
-            //System.out.println("Address\t\t: \n\t" + foodMS.address1 + "\n\t" + foodMS.address2 + "\n\t" + foodMS.zipCode + " " + foodMS.city + "\n\t" + foodMS.state + "\n");
-        } catch (FileNotFoundException ex) {
-            System.out.println("\n-- Fastest Deliveryman --\nAffiliate Details\n====================================");
-            System.out.println("No record");
-        }
+//    public static void readFoodMenu() throws IOException, ClassNotFoundException {
+//        try {
+//            ObjectInputStream foodInputStream
+//                    = new ObjectInputStream(new FileInputStream("foodMenu.dat"));
+//
+//            foodMenuStream foodMS = (foodMenuStream) foodInputStream.readObject();
+//            foodInputStream.close();
+////            System.out.println("\nRegistration Success\n====================================");
+////            System.out.println("Restaurant ID\t: " + foodMS.affID);
+////            System.out.println("Restaurant\t: " + foodMS.openDays + "\n");
+////            System.out.println("Owner's name\t: " + foodMS.openTimeStart);
+////            System.out.println("IC number\t: " + foodMS.openTimeEnd);
+////            System.out.println("Tel number\t: " + foodMS.restaufoodID);
+////            System.out.println("Email\t\t: " + foodMS.foodName);
+//            //System.out.println("Address\t\t: \n\t" + foodMS.address1 + "\n\t" + foodMS.address2 + "\n\t" + foodMS.zipCode + " " + foodMS.city + "\n\t" + foodMS.state + "\n");
+//        } catch (FileNotFoundException ex) {
+//            System.out.println("\n-- Fastest Deliveryman --\nAffiliate Details\n====================================");
+//            System.out.println("No record");
+//        }
+//    }
+    
+    public static ListInterface<foodMenuClass> retrieveFoodMenu() {
+         try {
+              ObjectInputStream oiStream = new ObjectInputStream(new FileInputStream("foodMenu.dat"));
+              foodM = (ListInterface<foodMenuClass>) (oiStream.readObject());
+              oiStream.close();
+            } catch (FileNotFoundException ex) {
+              System.out.println("FileNotFoundException");
+            } catch (IOException ex) {
+              System.out.println("IOException");
+            } catch (ClassNotFoundException ex) {
+              System.out.println("ClassNotFoundException");
+            }
+         return foodM;
     }
 }
