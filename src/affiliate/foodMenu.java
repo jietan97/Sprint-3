@@ -78,6 +78,7 @@ public class foodMenu {
     }
 
     public static void AddFood() {
+        foodM = retrieveFoodMenu();
 //        System.out.println("\nBusiness Hour\n====================================");
 //        System.out.printf("Business Days in week\t:\n");
 //        System.out.println("format:1,2,3,4,5(Mondays to Fridays)");
@@ -102,7 +103,7 @@ public class foodMenu {
         System.out.printf("Add foods?(y=yes,n=no)\t: ");
         toAddFood = sc.nextLine();
         
-        foodM = retrieveFoodMenu();
+        
         foodM.add(fmc);
         
         saveFoodMenu();
