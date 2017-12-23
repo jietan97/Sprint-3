@@ -9,7 +9,8 @@ package affiliate;
 
 //import java.util.ArrayList;
 //import java.util.List;
-import adt.LinkedStack;
+//import adt.LinkedStack;
+import adt.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -22,11 +23,13 @@ import java.util.Scanner;
 public class AffiliatesRegistration {
 
     //static LinkedStack<String> ls = new LinkedStack<>();
-    static AffiliateClass ac = new AffiliateClass();
+    static AffiliateClass as = new AffiliateClass();
     static Scanner sc = new Scanner(System.in);
     //static String userID, password, rpassword, passwordHit, name, restaurantName, email,icno, phoneNo, address1, address2, city, state, zipCode;
     static String toAddAffiliates = "y";
-    static LinkedStack<AffiliateClass> affiliates = new LinkedStack<>();
+//    static LinkedStack<AffiliateClass> affiliates = new LinkedStack<>();
+    static ListInterface<AffiliateClass> affiliates = new LList<>();
+//    static LinkedStack<AffiliateClass> affiliates2 = new LinkedStack<>();
 //    static LinkedStack<String> userIDL = new LinkedStack<>();
 //    static LinkedStack<String> restaurantNameL = new LinkedStack<>();
 //    static LinkedStack<String> nameL = new LinkedStack<>();
@@ -40,70 +43,75 @@ public class AffiliatesRegistration {
 //    static LinkedStack<String> cityL = new LinkedStack<>();
 //    static LinkedStack<String> stateL = new LinkedStack<>();
 //    static LinkedStack<String> zipCodeL = new LinkedStack<>();
-    static String userIDL, passwordL, rpasswordL, passwordHitL, nameL, restaurantNameL, emailL,icnoL, phoneNoL, address1L, address2L, cityL, stateL, zipCodeL; 
+//    static String userIDL, passwordL, rpasswordL, passwordHitL, nameL, restaurantNameL, emailL,icnoL, phoneNoL, address1L, address2L, cityL, stateL, zipCodeL; 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
-        AffiliateClass ac = new AffiliateClass(userIDL, passwordL, rpasswordL, passwordHitL, nameL, restaurantNameL, emailL,icnoL, phoneNoL, address1L, address2L, cityL, stateL, zipCodeL);
+//        AffiliateClass ac = new AffiliateClass(userIDL, passwordL, rpasswordL, passwordHitL, nameL, restaurantNameL, emailL,icnoL, phoneNoL, address1L, address2L, cityL, stateL, zipCodeL);
         //AffiliatesRegistration ar = new AffiliatesRegistration();
         while (toAddAffiliates.equals("y")) {
+            affiliates = retrieveAffiliate();
             AffiliatesReg();
+            saveAffiliate();
         }
+        
     }
 
     public static void AffiliatesReg() throws IOException, ClassNotFoundException {
         //menu start
         System.out.println("\n-- Fastest Deliveryman --\nAffiliates Registration\n====================================");
-        ac.userID = String.format("aff%03d", affiliates.size() + 1);
-        System.out.println("Restaurant ID\t: " + ac.userID);
+        //as.userID = String.format("aff%03d", affiliates.size() + 1);
+        as.userID = String.format("aff%03d", affiliates.getNumberOfEntries() + 1);
+        System.out.println("Restaurant ID\t: " + as.userID);
         //userID = sc.next();
         do {
             System.out.printf("Password\t: ");
             //password = sc.next();
-            ac.password = sc.next();
-            //as.password = as.getPassword();
+            as.password = sc.next();
+            //password = as.getPassword();
             System.out.printf("Retry password\t: ");
-            ac.rpassword = sc.next();
+            as.rpassword = sc.next();
 
-            if (!ac.password.equals(ac.rpassword)) {
+            if (!as.password.equals(as.rpassword)) {
                 System.out.println("\n**Please try the correct password!**");
             }
-        } while (!ac.password.equals(ac.rpassword));
+        } while (!as.password.equals(as.rpassword));
 
         System.out.printf("Password Hit\t: ");
         sc.nextLine();
         //for recovery
-        ac.passwordHit = sc.nextLine();
+        as.passwordHit = sc.nextLine();
         //Restaurant Information
         System.out.println("\nRestaurant Information\n====================================");
         System.out.printf("Restaurant name\t: ");
-        ac.restaurantName = sc.nextLine();
+        as.restaurantName = sc.nextLine();
         System.out.printf("Owner's name\t: ");
-        ac.name = sc.nextLine();
+        as.name = sc.nextLine();
         System.out.printf("IC number - e.g.(011111011111)\n * 16-digits\t: ");
-        ac.icno = sc.nextLine();
+        as.icno = sc.nextLine();
         System.out.printf("Tel number - e.g.(0123456789)\n * 10-11 digits\t: ");
-        ac.phoneNo = sc.nextLine();
+        as.phoneNo = sc.nextLine();
         System.out.printf("Email\t\t: ");
-        ac.email = sc.nextLine();
+        as.email = sc.nextLine();
         System.out.printf("Address\nline 1\t\t: ");
-        ac.address1 = sc.nextLine();
+        as.address1 = sc.nextLine();
         System.out.printf("line 2\t\t: ");
-        ac.address2 = sc.nextLine();
+        as.address2 = sc.nextLine();
         System.out.printf("Zip code\t: ");
-        ac.zipCode = sc.nextLine();
+        as.zipCode = sc.nextLine();
         System.out.printf("City\t\t: ");
-        ac.city = sc.nextLine();
+        as.city = sc.nextLine();
         System.out.printf("State\t\t: ");
-        ac.state = sc.nextLine();
+        as.state = sc.nextLine();
         System.out.printf("Are you sure (y=yes, n=no)\t : ");
 
         if (sc.nextLine().equals("y")) {
+            affiliates.add(as);
             showStaffInfo();
         } else {
             System.out.println("Data unsaved.");
             //break;
         }
 
-        affiliates.push(ac);
+        
         
 //        userIDL.push(as.userID);
 //        restaurantNameL.push(as.restaurantName);
@@ -125,16 +133,18 @@ public class AffiliatesRegistration {
     }
 
     public static void showStaffInfo() throws IOException, ClassNotFoundException {
+        //affiliates2 = retrieveAffiliate();
+        
         System.out.println("\nRegistration Success\n====================================");
-        System.out.println("Restaurant ID\t: " + ac.userID);
-        System.out.println("The restaurant " + ac.restaurantName + " has been registed.\n");
-        System.out.println("Owner's name\t: " + ac.name);
-        System.out.println("IC number\t: " + ac.icno);
-        System.out.println("Tel number\t: " + ac.phoneNo);
-        System.out.println("Email\t\t: " + ac.email);
-        System.out.println("Address\t\t: \n\t" + ac.address1 + "\n\t" + ac.address2 + "\n\t" + ac.zipCode + " " + ac.city + "\n\t" + ac.state + "\n");
+        System.out.println("Restaurant ID\t: " + as.userID);
+        System.out.println("The restaurant " + as.restaurantName + " has been registed.\n");
+        System.out.println("Owner's name\t: " + as.name);
+        System.out.println("IC number\t: " + as.icno);
+        System.out.println("Tel number\t: " + as.phoneNo);
+        System.out.println("Email\t\t: " + as.email);
+        System.out.println("Address\t\t: \n\t" + as.address1 + "\n\t" + as.address2 + "\n\t" + as.zipCode + " " + as.city + "\n\t" + as.state + "\n");
         System.out.println("====================================\n*Please remember your USER ID and PASSWORD!!*");
-        saveAffiliate();
+//        saveAffiliate();
     }
 
     public static class affiliateStream implements Serializable {
@@ -155,47 +165,78 @@ public class AffiliatesRegistration {
         public String zipCode = null;
     }
 
-    public static void saveAffiliate() throws IOException, ClassNotFoundException {
-        ObjectOutputStream affiliateOutputStream
-                = new ObjectOutputStream(new FileOutputStream("affiliate.dat"));
+    public static void saveAffiliate() {
+        
+        try {
+            ObjectOutputStream ooStream = new ObjectOutputStream(new FileOutputStream("affiliate.dat"));
+            ooStream.writeObject(affiliates);
+            ooStream.close();
+          } catch (FileNotFoundException ex) {
+            System.out.println("FileNotFoundException");
+          } catch (IOException ex) {
+              System.out.println(ex.getMessage());
+            System.out.println("IOException");
+          }
+        
+        
+        
+        
+        
+//        ObjectOutputStream affiliateOutputStream
+//                = new ObjectOutputStream(new FileOutputStream("affiliate.dat"));
+//
+//        affiliateStream affStrm = new affiliateStream();
+//        affStrm.userID = as.userID;
+//        affStrm.password = as.password;
+//        affStrm.passwordHit = as.passwordHit;
+//        affStrm.restaurantName = as.restaurantName;
+//        affStrm.name = as.name;
+//        affStrm.icno = as.icno;
+//        affStrm.phoneNo = as.phoneNo;
+//        affStrm.email = as.email;
+//        affStrm.address1 = as.address1;
+//        affStrm.address2 = as.address2;
+//        affStrm.city = as.city;
+//        affStrm.state = as.state;
+//        affStrm.zipCode = as.zipCode;
 
-        affiliateStream affStrm = new affiliateStream();
-        affStrm.userID = ac.userID;
-        affStrm.password = ac.password;
-        affStrm.passwordHit = ac.passwordHit;
-        affStrm.restaurantName = ac.restaurantName;
-        affStrm.name = ac.name;
-        affStrm.icno = ac.icno;
-        affStrm.phoneNo = ac.phoneNo;
-        affStrm.email = ac.email;
-        affStrm.address1 = ac.address1;
-        affStrm.address2 = ac.address2;
-        affStrm.city = ac.city;
-        affStrm.state = ac.state;
-        affStrm.zipCode = ac.zipCode;
-
-        affiliateOutputStream.writeObject(affStrm);
-        affiliateOutputStream.close();
+//        affiliateOutputStream.writeObject(affStrm);
+//        affiliateOutputStream.close();
     }
 
-    public static void readAffiliate() throws IOException, ClassNotFoundException {
-        try {
-            ObjectInputStream affiliateInputStream
-                    = new ObjectInputStream(new FileInputStream("affiliate.dat"));
-
-            affiliateStream affS = (affiliateStream) affiliateInputStream.readObject();
-            affiliateInputStream.close();
-            System.out.println("\nRegistration Success\n====================================");
-            System.out.println("Restaurant ID\t: " + affS.userID);
-            System.out.println("Restaurant\t: " + affS.restaurantName + "\n");
-            System.out.println("Owner's name\t: " + affS.name);
-            System.out.println("IC number\t: " + affS.icno);
-            System.out.println("Tel number\t: " + affS.phoneNo);
-            System.out.println("Email\t\t: " + affS.email);
-            System.out.println("Address\t\t: \n\t" + affS.address1 + "\n\t" + affS.address2 + "\n\t" + affS.zipCode + " " + affS.city + "\n\t" + affS.state + "\n");
-        } catch (FileNotFoundException ex) {
-            System.out.println("\n-- Fastest Deliveryman --\nAffiliate Details\n====================================");
-            System.out.println("No record");
-        }
+//    public static void readAffiliate() throws IOException, ClassNotFoundException {
+//        try {
+//            ObjectInputStream affiliateInputStream
+//                    = new ObjectInputStream(new FileInputStream("affiliate.dat"));
+//
+//            affiliateStream affS = (affiliateStream) affiliateInputStream.readObject();
+//            affiliateInputStream.close();
+//            System.out.println("\nRegistration Success\n====================================");
+//            System.out.println("Restaurant ID\t: " + affS.userID);
+//            System.out.println("Restaurant\t: " + affS.restaurantName + "\n");
+//            System.out.println("Owner's name\t: " + affS.name);
+//            System.out.println("IC number\t: " + affS.icno);
+//            System.out.println("Tel number\t: " + affS.phoneNo);
+//            System.out.println("Email\t\t: " + affS.email);
+//            System.out.println("Address\t\t: \n\t" + affS.address1 + "\n\t" + affS.address2 + "\n\t" + affS.zipCode + " " + affS.city + "\n\t" + affS.state + "\n");
+//        } catch (FileNotFoundException ex) {
+//            System.out.println("\n-- Fastest Deliveryman --\nAffiliate Details\n====================================");
+//            System.out.println("No record");
+//        }
+//    }
+    
+    public static ListInterface<AffiliateClass> retrieveAffiliate() {
+         try {
+              ObjectInputStream oiStream = new ObjectInputStream(new FileInputStream("affiliate.dat"));
+              affiliates = (ListInterface<AffiliateClass>) (oiStream.readObject());
+              oiStream.close();
+            } catch (FileNotFoundException ex) {
+              System.out.println("No record");
+            } catch (IOException ex) {
+              System.out.println("No record");
+            } catch (ClassNotFoundException ex) {
+              System.out.println("No record");
+            }
+         return affiliates;
     }
 }
