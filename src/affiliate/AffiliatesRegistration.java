@@ -177,31 +177,6 @@ public class AffiliatesRegistration {
               System.out.println(ex.getMessage());
             System.out.println("IOException");
           }
-        
-        
-        
-        
-        
-//        ObjectOutputStream affiliateOutputStream
-//                = new ObjectOutputStream(new FileOutputStream("affiliate.dat"));
-//
-//        affiliateStream affStrm = new affiliateStream();
-//        affStrm.userID = as.userID;
-//        affStrm.password = as.password;
-//        affStrm.passwordHit = as.passwordHit;
-//        affStrm.restaurantName = as.restaurantName;
-//        affStrm.name = as.name;
-//        affStrm.icno = as.icno;
-//        affStrm.phoneNo = as.phoneNo;
-//        affStrm.email = as.email;
-//        affStrm.address1 = as.address1;
-//        affStrm.address2 = as.address2;
-//        affStrm.city = as.city;
-//        affStrm.state = as.state;
-//        affStrm.zipCode = as.zipCode;
-
-//        affiliateOutputStream.writeObject(affStrm);
-//        affiliateOutputStream.close();
     }
 
 //    public static void readAffiliate() throws IOException, ClassNotFoundException {
@@ -231,11 +206,11 @@ public class AffiliatesRegistration {
               affiliates = (ListInterface<AffiliateClass>) (oiStream.readObject());
               oiStream.close();
             } catch (FileNotFoundException ex) {
-              System.out.println("No record");
+              System.out.println("FileNotFoundException");
             } catch (IOException ex) {
-              System.out.println("No record");
+              System.out.println("IOException");
             } catch (ClassNotFoundException ex) {
-              System.out.println("No record");
+              System.out.println("ClassNotFoundException");
             }
          return affiliates;
     }
