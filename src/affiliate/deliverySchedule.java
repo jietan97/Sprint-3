@@ -7,7 +7,6 @@ Member group 3 part A
 Task ID : 152569114
 User story : As a manager, I want to generate food delivery schedule, so that delivery man can delivery properly.
  */
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -20,9 +19,10 @@ import java.util.Scanner;
 public class deliverySchedule {
     static Scanner sc = new Scanner(System.in);
     static int orderCount = 1;
-    static String mainC,userID,orderID,password,rpassword,cname,cphoneNo,caddress1,caddress2,czipCode,ccity,cstate, cpaymentStatus;
     static String toAddDelivery = "y";
     static String quit = "f";
+    
+    static deliveryClass dc = new deliveryClass();
     
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         loginPage();
@@ -31,9 +31,9 @@ public class deliverySchedule {
     public static void loginPage() throws IOException, ClassNotFoundException {
         System.out.println("\n-- Fastest Deliveryman --\nDelivery\n====================================");
         System.out.printf("Enter Restaurant ID\t: ");
-        userID = sc.next();
+        dc.userID = sc.next();
         System.out.printf("Password\t\t: ");
-        password = sc.next();
+        dc.password = sc.next();
         while(quit.equals("f")){
             deliveryMenu();
         }
@@ -41,14 +41,14 @@ public class deliverySchedule {
     
     public static void deliveryMenu() throws IOException, ClassNotFoundException {
         System.out.println("\n-- Fastest Deliveryman --\nDelivery\n====================================");
-        System.out.printf("Restaurant ID %s\n\n",userID);
+        System.out.printf("Restaurant ID %s\n\n", dc.userID);
         System.out.println("1.\tCurrent delivery details");
         System.out.println("2.\tAdd delivery details");
         System.out.println("3.\tEdit delivery details");
         System.out.println("4.\tRemove delivery details");
         System.out.printf("Enter number : ");
-        mainC = sc.next();
-        switch(mainC) {
+        dc.mainC = sc.next();
+        switch(dc.mainC) {
         case "1":
             currentDelivery();
             break;
@@ -74,27 +74,27 @@ public class deliverySchedule {
     
     public static void addDelivery() throws IOException, ClassNotFoundException {
         System.out.println("\n-- Fastest Deliveryman --\nNew Delivery\n====================================");
-        orderID = String.format("od%05d", orderCount);
-        System.out.println("Order ID\t: " + orderID);
+        dc.orderID = String.format("od%05d", orderCount);
+        System.out.println("Order ID\t: " + dc.orderID);
         System.out.printf("Customer name\t: ");
         sc.nextLine();
-        cname = sc.nextLine();
+        dc.cname = sc.nextLine();
         System.out.printf("Contact number - e.g.(0123456789)\n * 10-11 digits\t: ");
-        cphoneNo = sc.next();
+        dc.cphoneNo = sc.next();
         System.out.printf("Address\nline 1\t\t: ");
         sc.nextLine();
-        caddress1 = sc.nextLine();
+        dc.caddress1 = sc.nextLine();
         System.out.printf("line 2\t\t: ");
-        caddress2 = sc.nextLine();
+        dc.caddress2 = sc.nextLine();
         System.out.printf("Zip code\t: ");
-        czipCode = sc.nextLine();
+        dc.czipCode = sc.nextLine();
         System.out.printf("City\t\t: ");
-        ccity = sc.nextLine();
+        dc.ccity = sc.nextLine();
         System.out.printf("State\t\t: ");
-        cstate = sc.nextLine();
+        dc.cstate = sc.nextLine();
         System.out.printf("Payment status (1=paid, 2=un pay): ");
-        cpaymentStatus = sc.next();
-        if (cpaymentStatus.equals("2")) {
+        dc.cpaymentStatus = sc.next();
+        if (dc.cpaymentStatus.equals("2")) {
             System.out.printf("Enter the price need to pay ");
             sc.next();
         }
@@ -115,10 +115,10 @@ public class deliverySchedule {
     
     public static void showDeliveryDetails() {
         System.out.println("\nRecord add Success\n====================================");
-        System.out.println("Order ID\t: " + orderID);
-        System.out.println("Customer\t: " + cname);
-        System.out.println("Tel number\t: " + cphoneNo);
-        System.out.println("Address\t\t: \n\t" + caddress1 + "\n\t" + caddress2 + "\n\t" + czipCode + " " + ccity + "\n\t" + cstate + "\n");
+        System.out.println("Order ID\t: " + dc.orderID);
+        System.out.println("Customer\t: " + dc.cname);
+        System.out.println("Tel number\t: " + dc.cphoneNo);
+        System.out.println("Address\t\t: \n\t" + dc.caddress1 + "\n\t" + dc.caddress2 + "\n\t" + dc.czipCode + " " + dc.ccity + "\n\t" + dc.cstate + "\n");
         System.out.println("====================================\n*The order will send in 30 minutes*");
     }
     
@@ -148,15 +148,15 @@ public class deliverySchedule {
             new ObjectOutputStream(new FileOutputStream("order.dat"));
         
         Order order = new Order();
-        order.ID = orderID;
-        order.name = cname;
-        order.phoneNo = cphoneNo;
-        order.address1 = caddress1;
-        order.address2 = caddress2;
-        order.zipCode = czipCode;
-        order.city = ccity;
-        order.state = cstate;
-        order.paymentStatus = cpaymentStatus;
+        order.ID = dc.orderID;
+        order.name = dc.cname;
+        order.phoneNo = dc.cphoneNo;
+        order.address1 = dc.caddress1;
+        order.address2 = dc.caddress2;
+        order.zipCode = dc.czipCode;
+        order.city = dc.ccity;
+        order.state = dc.cstate;
+        order.paymentStatus = dc.cpaymentStatus;
         
         orderOutputStream.writeObject(order);
         orderOutputStream.close();

@@ -6,15 +6,17 @@ public class foodMenuClass implements Serializable {
 
     String affID, foodID, foodName, foodDesc;
 //    , openDays, openTimeStart, openTimeEnd,
+    int foodCode = 0;
     double foodPrice, promotionPrice;
     static String restaufoodID;
 
     public foodMenuClass() {
     }
 
-    public foodMenuClass(String affID, String foodID, String foodName, String foodDesc, double foodPrice, double promotionPrice) {
+    public foodMenuClass(String affID, String foodID, int foodCode, String foodName, String foodDesc, double foodPrice, double promotionPrice) {
         this.affID = affID;
         this.foodID = foodID;
+        this.foodCode = foodCode;
         this.foodName = foodName;
         this.foodDesc = foodDesc;
         this.foodPrice = foodPrice;
@@ -90,6 +92,14 @@ public class foodMenuClass implements Serializable {
 
     public void setPromotionPrice(double promotionPrice) {
         this.promotionPrice = promotionPrice;
+    }
+
+    public int getFoodCode() {
+        return foodCode;
+    }
+
+    public void setFoodCode(int foodCode) {
+        this.foodCode = foodCode;
     }
 
 }

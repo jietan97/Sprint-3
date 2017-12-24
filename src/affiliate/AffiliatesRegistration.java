@@ -47,6 +47,7 @@ public class AffiliatesRegistration {
         System.out.println("\n-- Fastest Deliveryman --\nAffiliates Registration\n====================================");
         as.userID = String.format("aff%03d", affiliates.getNumberOfEntries() + 1);
         System.out.println("Restaurant ID\t: " + as.userID);
+        
         do {
             System.out.printf("Password\t: ");
             as.password = sc.next();

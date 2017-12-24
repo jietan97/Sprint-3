@@ -24,7 +24,7 @@ public class foodMenu {
 
     public static void main(String[] args) {
         while (leaveMenu.equals("y")) {
-            foodM = retrieveFoodMenu();
+
             FoodMainMenu();
             //saveFoodMenu();
         }
@@ -47,15 +47,16 @@ public class foodMenu {
         switch (mainChoice) {
             case "1":
                 affID();
+                fmc.foodCode = 0;
                 while (toAddFood.equals("y")) {
                     AddFood();
                 }
                 break;
             case "2":
-                affID();
-                while (toEditFood.equals("y")) {
-                    EditFood();
-                }
+                //affID();
+//                while (toEditFood.equals("y")) {
+                EditFood();
+//                }
                 break;
         }
     }
@@ -67,7 +68,7 @@ public class foodMenu {
     }
 
     public static void AddFood() {
-
+        foodM = retrieveFoodMenu();
 //        System.out.println("\nBusiness Hour\n====================================");
 //        System.out.printf("Business Days in week\t:\n");
 //        System.out.println("format:1,2,3,4,5(Mondays to Fridays)");
@@ -78,6 +79,8 @@ public class foodMenu {
 //        System.out.printf("\n\nBusiness Time - End\t(23:00):");
 //        openTimeStart = sc.nextLine();
         System.out.println("\nFoods\n====================================");
+        fmc.foodCode++;
+        System.out.println(fmc.foodCode);
         fmc.foodID = String.format("f%03d", foodM.getNumberOfEntries() + 1);
         //foodID = "f001";
         System.out.println("Food ID\t\t: " + fmc.foodID);
@@ -99,18 +102,36 @@ public class foodMenu {
     }
 
     public static void EditFood() {
+        //boolean foodIsValid = true;
+        foodM = retrieveFoodMenu();
         System.out.printf("Enter food ID\t: ");
         fmc.foodID = sc.nextLine();
-        System.out.printf("Name\t\t: ");
-        fmc.foodName = sc.nextLine();
-        System.out.printf("Description\t: ");
-        fmc.foodDesc = sc.nextLine();
-        System.out.printf("Price(RM)\t\t: ");
-        fmc.foodPrice = sc.nextDouble();
-        System.out.printf("Promotion price(RM)\t: ");
-        fmc.promotionPrice = sc.nextDouble();
-        System.out.printf("Edit more foods?(y=yes,n=no)\t: ");
-        toEditFood = sc.nextLine();
+        for (int j = 1; j < foodM.getNumberOfEntries() + 1; j++) {
+            //for testinng
+            //System.out.println(fmc.foodID + " "+ foodM.getEntry(j).getFoodID());
+            if (fmc.foodID.equals(foodM.getEntry(j).getFoodID())) {
+                //foodIsValid = true;
+                System.out.println("Item found, food name : " + foodM.getEntry(j).getFoodName() + " " + foodM.getEntry(j).getFoodPrice() + "\nPlease Enter new details");
+                System.out.printf("Name\t\t: ");
+                fmc.setFoodName(sc.nextLine());
+                System.out.printf("Description\t: ");
+                fmc.setFoodDesc(sc.nextLine());
+                System.out.printf("Price(RM)\t\t: ");
+                fmc.setFoodPrice(sc.nextDouble());
+                System.out.printf("Promotion price(RM)\t: ");
+                fmc.setPromotionPrice(sc.nextDouble());
+                sc.nextLine();
+                foodM.replace(j, fmc);
+                saveFoodMenu();
+                //break;
+            } else {
+                //foodIsValid = false;
+//                System.out.println("Item not found");
+//                break;
+            }
+        }
+
+        //sc.nextLine();
     }
 
     public static class foodMenuStream implements Serializable {
