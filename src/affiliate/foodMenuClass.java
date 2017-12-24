@@ -4,14 +4,15 @@ import java.io.Serializable;
 
 public class foodMenuClass implements Serializable {
 
-    String affID, foodID, foodName, foodDesc, foodPrice, promotionPrice;
+    String affID, foodID, foodName, foodDesc;
 //    , openDays, openTimeStart, openTimeEnd,
+    double foodPrice, promotionPrice;
     static String restaufoodID;
 
     public foodMenuClass() {
     }
-    
-    public foodMenuClass(String affID, String foodID, String foodName, String foodDesc, String foodPrice, String promotionPrice) {
+
+    public foodMenuClass(String affID, String foodID, String foodName, String foodDesc, double foodPrice, double promotionPrice) {
         this.affID = affID;
         this.foodID = foodID;
         this.foodName = foodName;
@@ -19,7 +20,7 @@ public class foodMenuClass implements Serializable {
         this.foodPrice = foodPrice;
         this.promotionPrice = promotionPrice;
     }
-    
+
     public String getAffID() {
         return affID;
     }
@@ -51,7 +52,6 @@ public class foodMenuClass implements Serializable {
 //    public static void setOpenTimeEnd(String openTimeEnd) {
 //        foodMenuClass.openTimeEnd = openTimeEnd;
 //    }
-
     public String getFoodID() {
         return foodID;
     }
@@ -76,19 +76,19 @@ public class foodMenuClass implements Serializable {
         this.foodDesc = foodDesc;
     }
 
-    public String getFoodPrice() {
+    public double getFoodPrice() {
         return foodPrice;
     }
 
-    public void setFoodPrice(String foodPrice) {
+    public void setFoodPrice(double foodPrice) {
         this.foodPrice = foodPrice;
     }
 
-    public String getPromotionPrice() {
+    public double getPromotionPrice() {
         return promotionPrice;
     }
 
-    public void setPromotionPrice(String promotionPrice) {
+    public void setPromotionPrice(double promotionPrice) {
         this.promotionPrice = promotionPrice;
     }
 

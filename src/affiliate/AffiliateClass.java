@@ -3,7 +3,7 @@ import java.io.Serializable;
 
 public class AffiliateClass implements Serializable {
     String userID, password, rpassword, passwordHit, name, restaurantName, email,icno, phoneNo, address1, address2, city, state, zipCode;
-
+    
     public AffiliateClass(String userID, String password, String rpassword, String passwordHit, String name, String restaurantName, String email, String icno, String phoneNo, String address1, String address2, String city, String state, String zipCode) {
         this.userID = userID;
         this.password = password;

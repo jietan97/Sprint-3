@@ -20,22 +20,11 @@ public class foodMenu {
     static foodMenuClass fmc = new foodMenuClass();
     static Scanner sc = new Scanner(System.in);
     static String toAddFood = "y", toEditFood = "y", mainChoice, leaveMenu = "y";
-    //static String affID, openDays, openTimeStart, openTimeEnd, foodID, foodName, foodDesc, foodPrice, promotionPrice;
-    //static LinkedStack<foodMenuClass> foodM = new LinkedStack<>();
     static ListInterface<foodMenuClass> foodM = new LList<>();
-//    static LinkedStack<String> affIDL = new LinkedStack<>();
-//    static LinkedStack<String> openDaysL = new LinkedStack<>();
-//    static LinkedStack<String> openTimeStartL = new LinkedStack<>();
-//    static LinkedStack<String> openTimeEndL = new LinkedStack<>();
-//    static LinkedStack<String> foodIDL = new LinkedStack<>();
-//    static LinkedStack<String> foodNameL = new LinkedStack<>();
-//    static LinkedStack<String> foodDescL = new LinkedStack<>();
-//    static LinkedStack<String> foodPriceL = new LinkedStack<>();
-//    static LinkedStack<String> promotionPriceL = new LinkedStack<>();
 
     public static void main(String[] args) {
         while (leaveMenu.equals("y")) {
-            //foodM = retrieveFoodMenu();
+            foodM = retrieveFoodMenu();
             FoodMainMenu();
             //saveFoodMenu();
         }
@@ -78,7 +67,7 @@ public class foodMenu {
     }
 
     public static void AddFood() {
-        foodM = retrieveFoodMenu();
+
 //        System.out.println("\nBusiness Hour\n====================================");
 //        System.out.printf("Business Days in week\t:\n");
 //        System.out.println("format:1,2,3,4,5(Mondays to Fridays)");
@@ -97,23 +86,16 @@ public class foodMenu {
         System.out.printf("Description\t: ");
         fmc.foodDesc = sc.nextLine();
         System.out.printf("Price(RM)\t\t: ");
-        fmc.foodPrice = sc.nextLine();
+        fmc.foodPrice = sc.nextDouble();
         System.out.printf("Promotion price(RM)\t: ");
-        fmc.promotionPrice = sc.nextLine();
+        fmc.promotionPrice = sc.nextDouble();
         System.out.printf("Add foods?(y=yes,n=no)\t: ");
+        sc.nextLine();
         toAddFood = sc.nextLine();
-        
-        
-        foodM.add(fmc);
-        
-        saveFoodMenu();
 
-//        foodIDL.push(foodID);
-//        foodNameL.push(foodName);
-//        foodDescL.push(foodDesc);
-//        foodPriceL.push(foodPrice);
-//        promotionPriceL.push(promotionPrice);
-//        affIDL.push(affID);
+        foodM.add(fmc);
+
+        saveFoodMenu();
     }
 
     public static void EditFood() {
@@ -124,9 +106,9 @@ public class foodMenu {
         System.out.printf("Description\t: ");
         fmc.foodDesc = sc.nextLine();
         System.out.printf("Price(RM)\t\t: ");
-        fmc.foodPrice = sc.nextLine();
+        fmc.foodPrice = sc.nextDouble();
         System.out.printf("Promotion price(RM)\t: ");
-        fmc.promotionPrice = sc.nextLine();
+        fmc.promotionPrice = sc.nextDouble();
         System.out.printf("Edit more foods?(y=yes,n=no)\t: ");
         toEditFood = sc.nextLine();
     }
@@ -144,37 +126,18 @@ public class foodMenu {
         public String promotionPrice = null;
     }
 
-//    public static void saveFoodMenu() throws IOException, ClassNotFoundException {
-//        ObjectOutputStream foodOutputStream
-//                = new ObjectOutputStream(new FileOutputStream("foodMenu.dat"));
-//
-//        foodMenuStream foodMStrm = new foodMenuStream();
-//        foodMStrm.affID = fmc.affID;
-//        foodMStrm.openDays = fmc.openDays;
-//        foodMStrm.openTimeStart = fmc.openTimeStart;
-//        foodMStrm.openTimeEnd = fmc.openTimeEnd;
-//        foodMStrm.restaufoodID = fmc.restaufoodID;
-//        foodMStrm.foodName = fmc.foodName;
-//        foodMStrm.foodDesc = fmc.foodDesc;
-//        foodMStrm.foodPrice = fmc.foodPrice;
-//        foodMStrm.promotionPrice = fmc.promotionPrice;
-//
-//        foodOutputStream.writeObject(foodMStrm);
-//        foodOutputStream.close();
-//    }
-    
     public static void saveFoodMenu() {
-        
+
         try {
-            ObjectOutputStream ooStream = new ObjectOutputStream(new FileOutputStream("foodMenu.dat"));
-            ooStream.writeObject(foodM);
-            ooStream.close();
-          } catch (FileNotFoundException ex) {
+            try (ObjectOutputStream ooStream = new ObjectOutputStream(new FileOutputStream("foodMenu.dat"))) {
+                ooStream.writeObject(foodM);
+            }
+        } catch (FileNotFoundException ex) {
             System.out.println("FileNotFoundException");
-          } catch (IOException ex) {
-              System.out.println(ex.getMessage());
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
             System.out.println("IOException");
-          }
+        }
     }
 
 //    public static void readFoodMenu() throws IOException, ClassNotFoundException {
@@ -197,19 +160,18 @@ public class foodMenu {
 //            System.out.println("No record");
 //        }
 //    }
-    
     public static ListInterface<foodMenuClass> retrieveFoodMenu() {
-         try {
-              ObjectInputStream oiStream = new ObjectInputStream(new FileInputStream("foodMenu.dat"));
-              foodM = (ListInterface<foodMenuClass>) (oiStream.readObject());
-              oiStream.close();
-            } catch (FileNotFoundException ex) {
-              System.out.println("FileNotFoundException");
-            } catch (IOException ex) {
-              System.out.println("IOException");
-            } catch (ClassNotFoundException ex) {
-              System.out.println("ClassNotFoundException");
+        try {
+            try (ObjectInputStream oiStream = new ObjectInputStream(new FileInputStream("foodMenu.dat"))) {
+                foodM = (ListInterface<foodMenuClass>) (oiStream.readObject());
             }
-         return foodM;
+        } catch (FileNotFoundException ex) {
+            System.out.println("FileNotFoundException");
+        } catch (IOException ex) {
+            System.out.println("IOException");
+        } catch (ClassNotFoundException ex) {
+            System.out.println("ClassNotFoundException");
+        }
+        return foodM;
     }
 }
