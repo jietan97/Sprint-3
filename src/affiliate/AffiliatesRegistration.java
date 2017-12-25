@@ -17,6 +17,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class AffiliatesRegistration {
 
@@ -30,23 +32,17 @@ public class AffiliatesRegistration {
     public static void main(String[] args) {
         while (toAddAffiliates.equals("y")) {
             affiliates = retrieveAffiliate();
-            try {
-                AffiliatesReg();
-            } catch (IOException ex) {
-                System.out.println("IOException");
-            } catch (ClassNotFoundException ex) {
-                System.out.println("ClassNotFoundException");
-            }
+            AffiliatesReg();
             //saveAffiliate();
         }
 
     }
 
-    public static void AffiliatesReg() throws IOException, ClassNotFoundException {
+    public static void AffiliatesReg() {
         //menu start
         System.out.println("\n-- Fastest Deliveryman --\nAffiliates Registration\n====================================");
-        as.userID = String.format("aff%03d", affiliates.getNumberOfEntries() + 1);
-        System.out.println("Restaurant ID\t: " + as.userID);
+        as.affID = String.format("aff%03d", affiliates.getNumberOfEntries() + 1);
+        System.out.println("Restaurant ID\t: " + as.affID);
         
         do {
             System.out.printf("Password\t: ");
@@ -56,6 +52,7 @@ public class AffiliatesRegistration {
 
             if (!as.password.equals(as.rpassword)) {
                 System.out.println("\n**Please try the correct password!**");
+                
             }
         } while (!as.password.equals(as.rpassword));
 
@@ -89,7 +86,13 @@ public class AffiliatesRegistration {
 
         if (sc.nextLine().equals("y")) {
             affiliates.add(as);
-            showStaffInfo();
+            try {
+                showStaffInfo();
+            } catch (IOException ex) {
+                System.out.println("IOException");
+            } catch (ClassNotFoundException ex) {
+                System.out.println("ClassNotFoundException");
+            }
         } else {
             System.out.println("Data unsaved.");
             //break;
@@ -101,7 +104,7 @@ public class AffiliatesRegistration {
 
     public static void showStaffInfo() throws IOException, ClassNotFoundException {
         System.out.println("\nRegistration Success\n====================================");
-        System.out.println("Restaurant ID\t: " + as.userID);
+        System.out.println("Restaurant ID\t: " + as.affID);
         System.out.println("The restaurant " + as.restaurantName + " has been registed.\n");
         System.out.println("Owner's name\t: " + as.name);
         System.out.println("IC number\t: " + as.icno);
@@ -114,7 +117,7 @@ public class AffiliatesRegistration {
 
     public static class affiliateStream implements Serializable {
 
-        public String userID = null;
+        public String affID = null;
         public String password = null;
         //public String rpassword = null;
         public String passwordHit = null;
@@ -152,7 +155,7 @@ public class AffiliatesRegistration {
 //            affiliateStream affS = (affiliateStream) affiliateInputStream.readObject();
 //            affiliateInputStream.close();
 //            System.out.println("\nRegistration Success\n====================================");
-//            System.out.println("Restaurant ID\t: " + affS.userID);
+//            System.out.println("Restaurant ID\t: " + affS.affID);
 //            System.out.println("Restaurant\t: " + affS.restaurantName + "\n");
 //            System.out.println("Owner's name\t: " + affS.name);
 //            System.out.println("IC number\t: " + affS.icno);

@@ -2,10 +2,10 @@ package affiliate;
 import java.io.Serializable;
 
 public class AffiliateClass implements Serializable {
-    String userID, password, rpassword, passwordHit, name, restaurantName, email,icno, phoneNo, address1, address2, city, state, zipCode;
+    String affID, password, rpassword, passwordHit, name, restaurantName, email,icno, phoneNo, address1, address2, city, state, zipCode;
     
-    public AffiliateClass(String userID, String password, String rpassword, String passwordHit, String name, String restaurantName, String email, String icno, String phoneNo, String address1, String address2, String city, String state, String zipCode) {
-        this.userID = userID;
+    public AffiliateClass(String affID, String password, String rpassword, String passwordHit, String name, String restaurantName, String email, String icno, String phoneNo, String address1, String address2, String city, String state, String zipCode) {
+        this.affID = affID;
         this.password = password;
         this.rpassword = rpassword;
         this.passwordHit = passwordHit;
@@ -25,8 +25,8 @@ public class AffiliateClass implements Serializable {
         
     }
 
-    public String getUserID() {
-        return userID;
+    public String getAffID() {
+        return affID;
     }
 
     public String getPassword() {
@@ -81,8 +81,8 @@ public class AffiliateClass implements Serializable {
         return zipCode;
     }
 
-    public void setUserID(String userID) {
-        this.userID = userID;
+    public void setAffID(String affID) {
+        this.affID = affID;
     }
 
     public void setPassword(String password) {
