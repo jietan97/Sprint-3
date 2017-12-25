@@ -1,9 +1,7 @@
-
 package affiliate;
 
 import adt.LList;
 import adt.ListInterface;
-import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
@@ -59,13 +57,13 @@ public class affiliateReport {
             }
         }
     }
-    
-    public static class foodMenuStream implements Serializable {
-
-        public String affID = null;
-        public String foodName = null;
-        public String foodDesc = null;
-        public String foodPrice = null;
-        public String promotionPrice = null;
-    }
+//    
+//    public static class foodMenuStream implements Serializable {
+//
+//        public String affID = null;
+//        public String foodName = null;
+//        public String foodDesc = null;
+//        public String foodPrice = null;
+//        public String promotionPrice = null;
+//    }
 }

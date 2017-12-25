@@ -27,21 +27,19 @@ public class AffiliatesRegistration {
 //    static LinkedStack<AffiliateClass> affiliates = new LinkedStack<>();
     static ListInterface<AffiliateClass> affiliates = new LList<>();
 
-    public static void main(String[] args) {
+//    public static void main(String[] args) {
 //        while (toAddAffiliates.equalsIgnoreCase("y")) {
 //            affiliates = retrieveAffiliate();
 //            AffiliatesReg();
 //            //saveAffiliate();
 //        }
-
-    }
-
+//    }
     public static void AffiliatesReg() {
         //menu start
         System.out.println("\n-- Fastest Deliveryman --\nAffiliates Registration\n====================================");
         as.affID = String.format("aff%03d", affiliates.getNumberOfEntries() + 1);
         System.out.println("Restaurant ID\t: " + as.affID);
-        
+
         do {
             System.out.printf("Password\t: ");
             as.password = sc.next();
@@ -50,7 +48,7 @@ public class AffiliatesRegistration {
 
             if (!as.password.equals(as.rpassword)) {
                 System.out.println("\n**Please try the correct password!**");
-                
+
             }
         } while (!as.password.equals(as.rpassword));
 
@@ -138,6 +136,7 @@ public class AffiliatesRegistration {
                 ooStream.writeObject(affiliates);
             }
         } catch (FileNotFoundException ex) {
+            System.out.println(ex.getMessage());
             System.out.println("FileNotFoundException");
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
@@ -171,10 +170,13 @@ public class AffiliatesRegistration {
                 affiliates = (ListInterface<AffiliateClass>) (oiStream.readObject());
             }
         } catch (FileNotFoundException ex) {
-            System.out.println("FileNotFoundException");
+            System.out.println(ex.getMessage());
+            System.out.println("The file can not be found.");
         } catch (IOException ex) {
+            System.out.println(ex.getMessage());
             System.out.println("IOException");
         } catch (ClassNotFoundException ex) {
+            System.out.println(ex.getMessage());
             System.out.println("ClassNotFoundException");
         }
         return affiliates;

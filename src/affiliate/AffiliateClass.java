@@ -1,9 +1,11 @@
 package affiliate;
+
 import java.io.Serializable;
 
 public class AffiliateClass implements Serializable {
-    String affID, password, rpassword, passwordHit, name, restaurantName, email,icno, phoneNo, address1, address2, city, state, zipCode;
-    
+
+    String affID, password, rpassword, passwordHit, name, restaurantName, email, icno, phoneNo, address1, address2, city, state, zipCode;
+
     public AffiliateClass(String affID, String password, String rpassword, String passwordHit, String name, String restaurantName, String email, String icno, String phoneNo, String address1, String address2, String city, String state, String zipCode) {
         this.affID = affID;
         this.password = password;
@@ -22,7 +24,7 @@ public class AffiliateClass implements Serializable {
     }
 
     AffiliateClass() {
-        
+
     }
 
     public String getAffID() {
