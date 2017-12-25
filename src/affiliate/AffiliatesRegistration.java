@@ -17,24 +17,22 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class AffiliatesRegistration {
 
     //static LinkedStack<String> ls = new LinkedStack<>();
     static AffiliateClass as = new AffiliateClass();
     static Scanner sc = new Scanner(System.in);
-    static String toAddAffiliates = "y";
+    //static String toAddAffiliates = "y";
 //    static LinkedStack<AffiliateClass> affiliates = new LinkedStack<>();
     static ListInterface<AffiliateClass> affiliates = new LList<>();
 
     public static void main(String[] args) {
-        while (toAddAffiliates.equals("y")) {
-            affiliates = retrieveAffiliate();
-            AffiliatesReg();
-            //saveAffiliate();
-        }
+//        while (toAddAffiliates.equalsIgnoreCase("y")) {
+//            affiliates = retrieveAffiliate();
+//            AffiliatesReg();
+//            //saveAffiliate();
+//        }
 
     }
 
@@ -84,7 +82,7 @@ public class AffiliatesRegistration {
         as.state = sc.nextLine();
         System.out.printf("Are you sure (y=yes, n=no)\t : ");
 
-        if (sc.nextLine().equals("y")) {
+        if (sc.nextLine().equalsIgnoreCase("y")) {
             affiliates.add(as);
             try {
                 showStaffInfo();
@@ -99,7 +97,7 @@ public class AffiliatesRegistration {
         }
 
         System.out.printf("====================================\nDo You want to add more affiliates?(y=yes, n=no): ");
-        toAddAffiliates = sc.nextLine();
+        affiliate.AffiliateMenu.toAddAffiliates = sc.nextLine();
     }
 
     public static void showStaffInfo() throws IOException, ClassNotFoundException {

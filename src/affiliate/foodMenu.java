@@ -23,11 +23,11 @@ public class foodMenu {
     static ListInterface<foodMenuClass> foodM = new LList<>();
 
     public static void main(String[] args) {
-        while (leaveMenu.equals("y")) {
-
-            FoodMainMenu();
-            //saveFoodMenu();
-        }
+//        while (leaveMenu.equals("y")) {
+//
+//            FoodMainMenu();
+//            //saveFoodMenu();
+//        }
     }
 
     public static void FoodMainMenu() {
@@ -48,7 +48,7 @@ public class foodMenu {
             case "1":
                 affID();
                 fmc.foodCode = 0;
-                while (toAddFood.equals("y")) {
+                while (toAddFood.equalsIgnoreCase("y")) {
                     AddFood();
                 }
                 break;
@@ -161,26 +161,6 @@ public class foodMenu {
         }
     }
 
-//    public static void readFoodMenu() throws IOException, ClassNotFoundException {
-//        try {
-//            ObjectInputStream foodInputStream
-//                    = new ObjectInputStream(new FileInputStream("foodMenu.dat"));
-//
-//            foodMenuStream foodMS = (foodMenuStream) foodInputStream.readObject();
-//            foodInputStream.close();
-////            System.out.println("\nRegistration Success\n====================================");
-////            System.out.println("Restaurant ID\t: " + foodMS.affID);
-////            System.out.println("Restaurant\t: " + foodMS.openDays + "\n");
-////            System.out.println("Owner's name\t: " + foodMS.openTimeStart);
-////            System.out.println("IC number\t: " + foodMS.openTimeEnd);
-////            System.out.println("Tel number\t: " + foodMS.restaufoodID);
-////            System.out.println("Email\t\t: " + foodMS.foodName);
-//            //System.out.println("Address\t\t: \n\t" + foodMS.address1 + "\n\t" + foodMS.address2 + "\n\t" + foodMS.zipCode + " " + foodMS.city + "\n\t" + foodMS.state + "\n");
-//        } catch (FileNotFoundException ex) {
-//            System.out.println("\n-- Fastest Deliveryman --\nAffiliate Details\n====================================");
-//            System.out.println("No record");
-//        }
-//    }
     public static ListInterface<foodMenuClass> retrieveFoodMenu() {
         try {
             try (ObjectInputStream oiStream = new ObjectInputStream(new FileInputStream("foodMenu.dat"))) {

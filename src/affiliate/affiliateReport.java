@@ -3,14 +3,9 @@ package affiliate;
 
 import adt.LList;
 import adt.ListInterface;
-import static affiliate.foodMenu.fmc;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class affiliateReport {
@@ -38,8 +33,12 @@ public class affiliateReport {
         System.out.println("\n-- Fastest Deliveryman --\nAffiliates Report Details\n====================================");
         for (int j = 1; j < affiliates.getNumberOfEntries() + 1; j++) {
             if (as.affID.equals(affiliates.getEntry(j).getAffID())){
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+                LocalDateTime now = LocalDateTime.now();
+                
                 System.out.println("Restaurant\t: "+affiliates.getEntry(j).getRestaurantName());
                 System.out.println("Owner\t\t: "+affiliates.getEntry(j).name);
+                System.out.println("Report Date\t: "+dtf.format(now));
                 System.out.println("\nFoods in system : ");
                 System.out.printf("ID   %-26s - %-10s\n","Food Name","Price");
                 System.out.println("==== ========================== - ==========");
@@ -58,15 +57,8 @@ public class affiliateReport {
                 
                 System.out.println("\nNumber of foods in list : " + qttFood);
             }
-                
-        
         }
-        
-        
     }
-    
-    
-    
     
     public static class foodMenuStream implements Serializable {
 
@@ -76,33 +68,4 @@ public class affiliateReport {
         public String foodPrice = null;
         public String promotionPrice = null;
     }
-
-//    public static void saveFoodMenu() {
-//
-//        try {
-//            try (ObjectOutputStream ooStream = new ObjectOutputStream(new FileOutputStream("foodMenu.dat"))) {
-//                ooStream.writeObject(foodM);
-//            }
-//        } catch (FileNotFoundException ex) {
-//            System.out.println("FileNotFoundException");
-//        } catch (IOException ex) {
-//            System.out.println(ex.getMessage());
-//            System.out.println("IOException");
-//        }
-//    }
-//
-//    public static ListInterface<foodMenuClass> retrieveFoodMenu() {
-//        try {
-//            try (ObjectInputStream oiStream = new ObjectInputStream(new FileInputStream("foodMenu.dat"))) {
-//                foodM = (ListInterface<foodMenuClass>) (oiStream.readObject());
-//            }
-//        } catch (FileNotFoundException ex) {
-//            System.out.println("FileNotFoundException");
-//        } catch (IOException ex) {
-//            System.out.println("IOException");
-//        } catch (ClassNotFoundException ex) {
-//            System.out.println("ClassNotFoundException");
-//        }
-//        return foodM;
-//    }
 }

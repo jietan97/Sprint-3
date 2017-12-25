@@ -15,6 +15,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class deliverySchedule {
     static Scanner sc = new Scanner(System.in);
@@ -24,8 +26,14 @@ public class deliverySchedule {
     
     static deliveryClass dc = new deliveryClass();
     
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
-        loginPage();
+    public static void main(String[] args) {
+//        try {
+//            loginPage();
+//        } catch (IOException ex) {
+//            System.out.println("IOException");
+//        } catch (ClassNotFoundException ex) {
+//            System.out.println("ClassNotFoundException");
+//        }
     }
     
     public static void loginPage() throws IOException, ClassNotFoundException {
