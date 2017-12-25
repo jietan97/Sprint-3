@@ -167,10 +167,13 @@ public class foodMenu {
                 foodM = (ListInterface<foodMenuClass>) (oiStream.readObject());
             }
         } catch (FileNotFoundException ex) {
+            System.out.println(ex.getMessage());
             System.out.println("FileNotFoundException");
         } catch (IOException ex) {
+            System.out.println(ex.getMessage());
             System.out.println("IOException");
         } catch (ClassNotFoundException ex) {
+            System.out.println(ex.getMessage());
             System.out.println("ClassNotFoundException");
         }
         return foodM;
